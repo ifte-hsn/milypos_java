@@ -1,6 +1,8 @@
 package com.helloshishir.milypos.category.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
@@ -15,6 +17,11 @@ public class Category {
     @Column(name = "name")
     String name;
 
-    @Column(name = "image")
-    String image;
+    @Column(name = "photo")
+    String photo;
+
+    @Transient
+    @JsonIgnore
+    String[] searchableAttributes = {"name"};
+
 }
