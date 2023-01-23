@@ -3,8 +3,10 @@ package com.helloshishir.milypos.util;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +15,15 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class StorageService {
-    public void save(MultipartFile file, String uploadDir, String fileName) throws IOException {
+
+    private String uploadDir;
+
+    public StorageService() throws FileNotFoundException {
+         uploadDir = ResourceUtils.getURL("classpath:").getPath()+"static/uploads";
+    }
+
+
+    public void save(MultipartFile file, String fileName) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
         if(!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);

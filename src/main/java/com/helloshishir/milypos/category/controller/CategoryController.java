@@ -1,6 +1,7 @@
 package com.helloshishir.milypos.category.controller;
 
 import com.helloshishir.milypos.category.model.Category;
+import com.helloshishir.milypos.category.repository.CategoryRepository;
 import com.helloshishir.milypos.category.service.CategoryService;
 import com.helloshishir.milypos.util.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class CategoryController {
 
     @Autowired
     StorageService storageService;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping("index")
     String index() {
@@ -89,11 +92,12 @@ public class CategoryController {
             // get upload directory
             // in our case we will save it to the static resource directory
             // that exists in our class path
-            String uploadDir = ResourceUtils.getURL("classpath:").getPath()+"/static/uploads/categories/"+saveCategory.getId();
-
-            storageService.clearDir(uploadDir);
-            storageService.save(multipartFile, uploadDir, fileName);
+            fileName = "category-"+saveCategory.getId()+"-"+fileName;
+            storageService.save(multipartFile, fileName);
         }
+        saveCategory.setPhoto(fileName);
+        categoryRepository.save(saveCategory);
+
         redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "User saved successfully!");
         return "redirect:/categories/index";
     }

@@ -96,14 +96,6 @@
     return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: pink;border: 1px solid red;border-radius:90px;padding:4px">$1</span>')
   }
 
-  function imageFormatter(value, row) {
-      console.log(row)
-      if (row.photo) {
-          value = "/uploads/categories/"+row.id+"/"+row.photo
-          return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: 50px; width: auto;" class="img-responsive"></a>';
-      }
-  }
-
   function actionBtnFormatter(value, row, index) {
     /*<![CDATA[*/
     var editUrl = /*[[@{/categories/edit/}]]*/;

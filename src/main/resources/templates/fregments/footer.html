@@ -32,6 +32,19 @@
             $('.sidebar-menu').tree()
         });
 
+
+        function imageFormatter(value, row) {
+            console.log(row)
+            if (row.photo) {
+                value = "/uploads/"+row.photo
+                return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: 50px; width: auto;" class="img-responsive"></a>';
+            } else {
+
+                return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="/img/image-placeholder.png" style="max-height: 50px; width: auto;" class="img-responsive"></a>';
+
+            }
+        }
+
         function formateBytes(bytes) {
             if(bytes < 1024) return bytes + ' Bytes';
             else if(bytes < 1048576 ) return (bytes/1024).toFixed(2) + " KB";
