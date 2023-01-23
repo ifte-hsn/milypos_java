@@ -43,22 +43,8 @@
                             </div><!-- .col-md-6 col-sm-6 col-xs-12 -->
                         </div>
 
-                        <div class="form-group">
-                            <label for="image" class="control-label col-md-3 col-sm-3 col-xs-12">
-                                Upload Image
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <label class="btn btn-default">Upload
-                                    <input type="hidden" th:field="*{photo}">
-                                    <input type="file" name="image" id="uploadImage" accept="image/gif, image/jpeg, image/png, image/svg" style="display: none">
 
-                                </label>
-                                <span class="label label-default" id="upload-file-info"></span>
-                                <p class="help-block" id="upload-file-status">
-                                    Accepted filetypes are jpg, png, gif, and svg. Max upload size allowed is 8M.
-                                </p>
-                            </div><!-- col-md-6 col-sm-6 col-xs-12 -->
-
+                        <div th:replace="~{fregments/imageUpload::imageUpload}"></div>
                         </div><!-- form-group -->
                         <div class="form-group">
                             <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">

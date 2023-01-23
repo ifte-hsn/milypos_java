@@ -55,6 +55,8 @@
             let uploadFileStatus = $('#upload-file-status');
             let uploadFileInfo = $('#upload-file-info');
 
+            uploadFileInfo.children().remove();
+            $('.help-block.text-success').children('i.fa').remove();
             uploadFileInfo.append('<span class="badge badge-primary">'+this.files[0].name+'('+formateBytes(this.files[0].size)+')'+'</span>');
             uploadFileStatus.addClass('text-success').removeClass('note-help-block').prepend('<i class="fa fa-check"></i>')
 
