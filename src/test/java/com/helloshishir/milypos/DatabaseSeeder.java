@@ -1,11 +1,15 @@
 package com.helloshishir.milypos;
 
+import com.github.javafaker.Faker;
 import com.helloshishir.milypos.category.model.Category;
 import com.helloshishir.milypos.category.repository.CategoryRepository;
+import com.helloshishir.milypos.user.model.User;
+import com.helloshishir.milypos.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 @DataJpaTest
@@ -15,6 +19,9 @@ public class DatabaseSeeder {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     void seedCategoriesTable() {
@@ -99,5 +106,44 @@ public class DatabaseSeeder {
         category = new Category();
         category.setName("Bag");
         categoryRepository.save(category);
+    }
+
+    @Test
+    void seedUsersTable() {
+        Faker faker = new Faker();
+
+        User user = new User();
+        user.setEmail("ifte.hsn@gmail.com");
+        user.setPassword(new BCryptPasswordEncoder().encode("123456"));
+        user.setFirstName("Iftekhar");
+        user.setLastName("Hossain");
+        user.setWebsite("http://helloshishir.com");
+        user.setEmployeeNum("0000001");
+        user.setPhone("01717035892");
+        user.setFax(faker.phoneNumber().subscriberNumber());
+        user.setAddress(faker.address().fullAddress());
+        user.setCity(faker.address().cityName());
+        user.setState(faker.address().state());
+        user.setZip(faker.address().zipCode());
+        userRepository.save(user);
+
+        for(int i = 0; i < 200; i++) {
+            user = new User();
+            user.setEmail(faker.internet().safeEmailAddress());
+            user.setPassword(new BCryptPasswordEncoder().encode("123456"));
+            user.setFirstName(faker.name().firstName());
+            user.setLastName(faker.name().lastName());
+            user.setWebsite(faker.internet().url());
+            user.setEmployeeNum(faker.idNumber().ssnValid());
+            user.setPhone(faker.phoneNumber().cellPhone());
+            user.setFax(faker.phoneNumber().subscriberNumber());
+            user.setAddress(faker.address().fullAddress());
+            user.setCity(faker.address().cityName());
+            user.setState(faker.address().state());
+            user.setZip(faker.address().zipCode());
+            userRepository.save(user);
+        }
+
+
     }
 }
