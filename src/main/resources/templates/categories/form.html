@@ -23,7 +23,8 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a th:href="@{/categories/index}">Categories</a></li>
-                <li class="active" th:text="${category.getName()}"></li>
+                <li th:if="${category.id != null}" class="active" th:text="${category.getName()}"></li>
+                <li th:if="${category.id == null}" class="active">Create</li>
             </ol>
         </section>
         <!-- Main content -->
@@ -45,7 +46,7 @@
 
 
                         <div th:replace="~{fregments/imageUpload::imageUpload}"></div>
-                        </div><!-- form-group -->
+
                         <div class="form-group">
                             <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">
                                 Name
@@ -82,12 +83,6 @@
 
 
 <script th:inline="javascript">
-
-    function customSearchFormatter(value, searchText) {
-        console.log(value)
-        return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: pink;border: 1px solid red;border-radius:90px;padding:4px">$1</span>')
-    }
-
     function actionBtnFormatter(value, row, index) {
         /*<![CDATA[*/
         var editUrl = /*[[@{/categories/edit?id=}]]*/;
