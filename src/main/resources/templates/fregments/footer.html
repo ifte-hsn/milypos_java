@@ -50,6 +50,33 @@
             }
         }
 
+
+        function usersLinkFormatter(value, row, index) {
+            return `<a href="${row.id}">${row.firstName + " " + row.lastName}</a>`
+        }
+
+        function emailFormatter(value) {
+            if (value) {
+                return '<a href="mailto:' + value + '">' + value + '</a>'
+            }
+        }
+
+        function phoneFormatter(value) {
+            if (value) {
+                return '<a href="tel:' + value + '">' + value + '</a>';
+            }
+        }
+
+        function sexFormatter(value) {
+            if(value) {
+                return value;
+            }
+        }
+
+        function customSearchFormatter(value, searchText) {
+            return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: pink;border: 1px solid red;border-radius:90px;padding:4px">$1</span>')
+        }
+
         function formateBytes(bytes) {
             if(bytes < 1024) return bytes + ' Bytes';
             else if(bytes < 1048576 ) return (bytes/1024).toFixed(2) + " KB";

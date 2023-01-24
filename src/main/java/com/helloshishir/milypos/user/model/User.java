@@ -1,5 +1,6 @@
 package com.helloshishir.milypos.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -57,4 +58,9 @@ public class User {
 
     @Column(name = "is_active")
     boolean isActive;
+
+    @Transient
+    @JsonIgnore
+    String[] searchableAttributes = {"email", "password", "firstName", "lastName", "sex", "phone"};
+
 }
