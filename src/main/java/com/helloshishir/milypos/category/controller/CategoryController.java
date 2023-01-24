@@ -28,17 +28,16 @@ public class CategoryController {
 
     @Autowired
     StorageService storageService;
-    @Autowired
-    private CategoryRepository categoryRepository;
+
 
     @GetMapping("index")
-    String index() {
+    public String index() {
         return "categories/index";
     }
 
-    @GetMapping("list")
+    @GetMapping("getCategoryList")
     @ResponseBody
-    public ResponseEntity<Page<Category>> getCustomer(@RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+    public ResponseEntity<Page<Category>> getCategoryList(@RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
                                                       @RequestParam(value = "limit", defaultValue = "10", required = false) int limit,
                                                       @RequestParam(value = "order", defaultValue = "ASC", required = false) String order,
                                                       @RequestParam(value = "sort", defaultValue = "id", required = false) String sort,
@@ -96,9 +95,9 @@ public class CategoryController {
             storageService.save(multipartFile, fileName);
         }
         saveCategory.setPhoto(fileName);
-        categoryRepository.save(saveCategory);
+        categoryService.save(saveCategory);
 
-        redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "User saved successfully!");
+        redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "Category saved successfully!");
         return "redirect:/categories/index";
     }
 
@@ -106,7 +105,7 @@ public class CategoryController {
     public String delete(@PathVariable Integer id, ModelMap modelMap,
                          RedirectAttributes redirectAttributes) {
         categoryService.delete(id);
-        redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "User saved successfully!");
+        redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "Category deleted successfully!");
 
         return "redirect:/categories/index";
 
