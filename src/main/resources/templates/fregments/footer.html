@@ -23,6 +23,7 @@
     <script th:src="@{/js/jquery.slimscroll.min.js}"></script>
     <!-- FastClick -->
     <script th:src="@{/js/fastclick.js}"></script>
+    <script th:src="@{/js/ekko-lightbox.min.js}"></script>
     <!-- AdminLTE App -->
     <script th:src="@{/js/adminlte.min.js}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -32,14 +33,18 @@
             $('.sidebar-menu').tree()
         });
 
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
 
         function imageFormatter(value, row) {
-            console.log(row)
+
             if (row.photo) {
                 value = "/uploads/"+row.photo
                 return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: 50px; width: auto;" class="img-responsive"></a>';
             } else {
-
+                value = '/img/image-placeholder.png';
                 return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="/img/image-placeholder.png" style="max-height: 50px; width: auto;" class="img-responsive"></a>';
 
             }
