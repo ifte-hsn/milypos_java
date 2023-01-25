@@ -24,6 +24,12 @@ public class DatabaseSeeder {
     UserRepository userRepository;
 
     @Test
+    void seedDatabase() {
+        seedCategoriesTable();
+        seedUsersTable();
+    }
+
+    @Test
     void seedCategoriesTable() {
         Category category = new Category();
         category.setName("Mobile");
