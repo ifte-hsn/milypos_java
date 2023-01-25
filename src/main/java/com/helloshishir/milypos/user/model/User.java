@@ -1,6 +1,8 @@
 package com.helloshishir.milypos.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.helloshishir.milypos.role.model.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -59,8 +61,21 @@ public class User {
     @Column(name = "is_active")
     boolean isActive;
 
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    Role role;
+
     @Transient
     @JsonIgnore
     String[] searchableAttributes = {"email", "password", "firstName", "lastName", "sex", "phone"};
 
+
+    public Role getRole() {
+        return role;
+    }
+
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

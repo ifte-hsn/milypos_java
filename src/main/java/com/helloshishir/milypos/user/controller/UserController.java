@@ -1,6 +1,8 @@
 package com.helloshishir.milypos.user.controller;
 
 
+import com.helloshishir.milypos.role.model.Role;
+import com.helloshishir.milypos.role.service.RoleService;
 import com.helloshishir.milypos.user.model.User;
 import com.helloshishir.milypos.user.service.UserService;
 import com.helloshishir.milypos.util.StorageService;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -24,6 +27,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RoleService roleService;
 
     @Autowired
     StorageService storageService;
@@ -53,7 +59,9 @@ public class UserController {
     @GetMapping("/create")
     public String showCreateForm(ModelMap modelMap) {
         User user = new User();
+        List<Role> roleList = roleService.findAll();
         modelMap.put("user", user);
+        modelMap.put("roleList", roleList);
         return "users/form";
 
     }
@@ -61,7 +69,9 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, ModelMap modelMap) {
         User user = userService.findById(id);
+        List<Role> roleList = roleService.findAll();
         modelMap.put("user", user);
+        modelMap.put("roleList", roleList);
         return "users/form";
     }
 

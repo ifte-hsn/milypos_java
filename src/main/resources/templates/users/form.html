@@ -138,10 +138,9 @@
                                                 Role <span class="text-danger">*</span>
                                             </label><!-- control-label col-md-3 col-sm-3 col-xs-12 -->
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select
+                                                <select th:field="${user.role}"
                                                         class="form-control col-md-7 col-xs-12">
-                                                    <option value="super admin">Super Admin</option>
-                                                    <option value="admin">Admin</option>
+                                                    <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
                                                 </select>
                                             </div><!-- .col-md-6 col-sm-6 col-xs-12 -->
                                         </div><!-- form-group -->

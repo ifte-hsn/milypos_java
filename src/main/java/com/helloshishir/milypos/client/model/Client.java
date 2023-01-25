@@ -22,8 +22,8 @@ public class Client {
     @Column(name = "last_name")
     String lastName;
 
-    @Column(name = "avatar")
-    String avatar;
+    @Column(name = "photo")
+    String photo;
 
 
     @Column(name = "sex")
