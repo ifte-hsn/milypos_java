@@ -50,9 +50,8 @@
             }
         }
 
-
-        function usersLinkFormatter(value, row, index) {
-            return `<a href="${row.id}">${row.firstName + " " + row.lastName}</a>`
+        function customSearchFormatter(value, searchText) {
+            return value.toString().replace(new RegExp('(' + searchText + ')', 'gim'), '<span style="background-color: pink;border: 1px solid red;border-radius:90px;padding:4px">$1</span>')
         }
 
         function emailFormatter(value) {

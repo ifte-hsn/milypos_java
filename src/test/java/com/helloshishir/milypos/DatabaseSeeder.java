@@ -4,11 +4,10 @@ import com.github.javafaker.Faker;
 import com.helloshishir.milypos.category.model.Category;
 import com.helloshishir.milypos.category.repository.CategoryRepository;
 import com.helloshishir.milypos.client.model.Client;
-import com.helloshishir.milypos.country.model.Country;
+import com.helloshishir.milypos.client.repository.ClientRepository;
 import com.helloshishir.milypos.country.repository.CountryRepository;
 import com.helloshishir.milypos.permission.model.Permission;
 import com.helloshishir.milypos.permission.repository.PermissionRepository;
-import com.helloshishir.milypos.repository.ClientRepository;
 import com.helloshishir.milypos.role.model.Role;
 import com.helloshishir.milypos.role.repository.RoleRepository;
 import com.helloshishir.milypos.user.model.User;
@@ -49,6 +48,7 @@ public class DatabaseSeeder {
     void seedDatabase() {
         seedCategoriesTable();
         seedUsersTable();
+        seedClientsTable();
         seedRoleTable();
     }
 
@@ -187,7 +187,6 @@ public class DatabaseSeeder {
             client.setFirstName(faker.name().firstName());
             client.setLastName(faker.name().lastName());
             client.setSex(faker.demographic().sex());
-            client.setPhoto(faker.avatar().image());
             client.setPhone(faker.phoneNumber().cellPhone());
             client.setFax(faker.phoneNumber().phoneNumber());
             client.setAddress(faker.address().fullAddress());

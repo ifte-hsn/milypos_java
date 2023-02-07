@@ -67,7 +67,7 @@ public class User {
 
     @Transient
     @JsonIgnore
-    String[] searchableAttributes = {"email", "password", "firstName", "lastName", "sex", "phone"};
+    String[] searchableAttributes = {"email", "firstName", "lastName", "sex", "phone"};
 
 
     public Role getRole() {

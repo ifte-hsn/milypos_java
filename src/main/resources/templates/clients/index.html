@@ -16,11 +16,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Users List
+                Clients List
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Users</li>
+                <li class="active">Clients</li>
             </ol>
         </section>
 
@@ -32,10 +32,10 @@
                 <div class="box-header with-border clearfix">
 
                     <div class="pull-right">
-                        <a th:href="@{/users/create}" class="btn btn-info">
+                        <a th:href="@{/clients/create}" class="btn btn-info">
                             <i class="fa fa-plus"></i> Create New
                         </a>
-                        <a th:href="@{/users/export}" class="btn btn-default">
+                        <a th:href="@{/clients/export}" class="btn btn-default">
                             <i class="fa fa-download"></i> Export
                         </a>
                     </div>
@@ -46,7 +46,7 @@
                             class="table table-responsive table-striped"
                             id="table"
                             data-toggle="table"
-                            data-url="/users/getUserList"
+                            data-url="/clients/getClientList"
                             data-search="true"
                             data-side-pagination="server"
                             data-data-field="content"
@@ -65,7 +65,7 @@
                             </th>
                             <th data-field="id" data-sortable="true">ID</th>
                             <th data-field="photo" data-formatter="imageFormatter">Image</th>
-                            <th data-formatter="usersLinkFormatter" data-sortable="true">Name</th>
+                            <th data-formatter="clientsLinkFormatter" data-sortable="true">Name</th>
                             <th data-field="email" data-formatter="emailFormatter" data-sortable="true">Email</th>
                             <th data-field="sex" data-formatter="sexFormatter" data-sortable="true">Sex</th>
                             <th data-field="phone" data-formatter="phoneFormatter" data-sortable="true">Phone</th>
@@ -95,14 +95,15 @@
 
 <script th:inline="javascript">
 
-    function usersLinkFormatter(value, row, index) {
+
+    function clientsLinkFormatter(value, row, index) {
         return `<a href="${row.id}">${row.firstName + " " + row.lastName}</a>`
     }
 
     function actionBtnFormatter(value, row, index) {
         /*<![CDATA[*/
-        var editUrl = /*[[@{/users/edit/}]]*/;
-        var deleteUrl = /*[[@{/users/delete/}]]*/;
+        var editUrl = /*[[@{/clients/edit/}]]*/;
+        var deleteUrl = /*[[@{/clients/delete/}]]*/;
         return [
             '<span style="white-space: nowrap;"><a href="' + editUrl + row.id + '" class="btn btn-warning btn-sm margin-r-5" data-tooltip="true" title="Edit" data-original-title="Edit"><i class="fa fa-pencil-square-o"></i></a>' +
             '<a href="' + deleteUrl + row.id + '" class="btn btn-danger btn-sm" data-tooltip="true" title data-original-title="Delete"><i class="fa fa-trash"></i></a></span>'

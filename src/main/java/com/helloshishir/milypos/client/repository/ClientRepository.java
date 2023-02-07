@@ -1,4 +1,4 @@
-package com.helloshishir.milypos.repository;
+package com.helloshishir.milypos.client.repository;
 
 import com.helloshishir.milypos.client.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;

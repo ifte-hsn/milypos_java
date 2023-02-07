@@ -1,5 +1,6 @@
 package com.helloshishir.milypos.client.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -46,4 +47,9 @@ public class Client {
 
     @Column(name = "zip")
     String zip;
+
+    @Transient
+    @JsonIgnore
+    String[] searchableAttributes = {"email", "firstName", "lastName", "sex", "phone"};
+
 }
