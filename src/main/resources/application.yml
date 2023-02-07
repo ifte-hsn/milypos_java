@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/milypos
-    username: root
-    password: 1234
+    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:milypos}
+    username: ${RDS_USERNAME:root}
+    password: ${RDS_PASSWORD:1234}
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
