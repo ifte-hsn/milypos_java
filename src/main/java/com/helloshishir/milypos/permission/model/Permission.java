@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "permission")
+@Table(name = "permissions")
 @Setter
 @Getter
 public class Permission {
