@@ -23,9 +23,13 @@ public class Role {
 
     String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
     List<Permission> permissionList;
+
+    @Transient
+    @JsonIgnore
+    String[] searchableAttributes = {"name"};
 
     @JsonIgnore
     public List<Permission> getPermissionList() {

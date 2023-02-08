@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fregments/head::head}"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header th:replace="~{fregments/top-nav::top-nav}"></header>
+    <!-- =============================================== -->
+
+    <aside th:replace="~{fregments/left-sidebar::left-sidebar}"></aside>
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <span th:if="${role.id == null}">Add New Role</span>
+                <span th:if="${role.id != null}">Update Role</span>
+            </h1>
+
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a th:href="@{/roles/index}">Role</a></li>
+                <li th:if="${role.id != null}" class="active" th:text="${role.name}"></li>
+                <li th:if="${role.id == null}" class="active">Create</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+
+
+            <!-- Default box -->
+            <div class="box box-primary">
+                <div class="box-body">
+                    <form method="post" autocomplete="off"
+                          th:action="@{/users/save}"
+                          th:object="${role}"
+                          class="form-horizontal form-label-left">
+                        <input type="hidden" th:field="*{id}">
+
+
+                        <div class="box-body">
+
+                            <div class="form-group margin-top">
+                                <label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Name
+                                </label><!-- control-label col-md-3 col-sm-3 col-xs-12 -->
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" th:field="*{name}" class="form-control col-md-7 col-xs-12"
+                                           placeholder="Name">
+                                </div><!-- .col-md-6 col-sm-6 col-xs-12 -->
+                            </div><!-- form-group -->
+
+                            <div style="margin-bottom: 100px"></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped permissions-table">
+
+                                    <thead>
+                                    <tr class="title">
+                                        <th colspan="6"
+                                            class="text-center">
+                                            <span th:if="${role.name}" th:text="${role.name+' '}"></span>Permissions
+                                        </th>
+                                    </tr>
+
+                                    <tr>
+                                        <th rowspan="2" class="text-center">Module Name</th>
+                                        <th colspan="5" class="text-center">Permissions</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="text-center">View</th>
+                                        <th class="text-center">Add</th>
+                                        <th class="text-center">Edit</th>
+                                        <th class="text-center">Delete</th>
+                                        <th class="text-center">Miscellaneous</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <!--****************************-->
+                                    <!--         USER module        -->
+                                    <!--****************************-->
+
+                                    <tr>
+                                        <td>
+                                            <strong>Staff</strong>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="checkbox icheck">
+                                                <label for="view_user">
+                                                    <input name="view_user" id="view_user" type="checkbox">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="checkbox icheck">
+                                                <label for="add_user">
+                                                    <input name="add_user" id="add_user" type="checkbox">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="checkbox icheck">
+                                                <label for="edit_user">
+                                                    <input name="edit_user" id="edit_user" type="checkbox">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="checkbox icheck">
+                                                <label for="delete_user">
+                                                    <input name="delete_user" id="delete_user" type="checkbox">
+                                                </label>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span style="display:inline-block;">
+                                                <div class="checkbox icheck">
+                                                    <label for="restore_user" class="label-padding">
+                                                        <input name="restore_user" id="restore_user"
+                                                               type="checkbox">
+                                                        <strong>Restore</strong>
+                                                    </label>
+                                                </div>
+                                            </span>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div><!-- table-responsive -->
+
+                        </div><!-- .box-body -->
+                        <div class="box-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button class="btn btn-lg btn-success"><i class="fa fa-floppy-o"></i> {{
+                                        Save
+                                    </button>
+                                </div><!-- col-md-4 col-md-offset-6 -->
+                            </div><!-- .row -->
+                        </div><!-- box-footer -->
+                    </form><!-- form-horizontal form-label-left -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="~{fregments/footer::footer}"></footer>
+
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+
+<script th:inline="javascript">
+    function actionBtnFormatter(value, row, index) {
+        /*<![CDATA[*/
+        var editUrl = /*[[@{/roles/edit?id=}]]*/;
+        var deleteUrl = /*[[@{/roles/delete?id=}]]*/;
+        return [
+            '<span style="white-space: nowrap;"><a href="' + editUrl + row.id + '" class="btn btn-warning btn-sm margin-r-5" data-tooltip="true" title="Edit" data-original-title="Edit"><i class="fa fa-pencil-square-o"></i></a>' +
+            '<a href="' + deleteUrl + row.id + '" class="btn btn-danger btn-sm" data-tooltip="true" title data-original-title="Delete"><i class="fa fa-trash"></i></a></span>'
+        ].join('')
+        /*]]>*/
+    }
+</script>
+
+
+<section th:replace="~{fregments/footer::footer-script}"></section>
+</body>
+</html>

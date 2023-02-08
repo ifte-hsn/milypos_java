@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:3306}/${RDS_DB_NAME:milypos}
+    url: jdbc:mysql://${RDS_HOSTNAME:localhost}:${RDS_PORT:33061}/${RDS_DB_NAME:milypos}
     username: ${RDS_USERNAME:root}
     password: ${RDS_PASSWORD:1234}
     driver-class-name: com.mysql.jdbc.Driver
@@ -20,4 +20,5 @@ spring:
     password: 1234
     baseline-description: "init"
     baseline-version: 0
-
+server:
+  port: 8083

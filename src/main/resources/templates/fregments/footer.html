@@ -24,13 +24,30 @@
     <!-- FastClick -->
     <script th:src="@{/js/fastclick.js}"></script>
     <script th:src="@{/js/ekko-lightbox.min.js}"></script>
+
+    <script th:src="@{/plugins/iCheck/icheck.min.js}"></script>
+
     <!-- AdminLTE App -->
     <script th:src="@{/js/adminlte.min.js}"></script>
     <!-- AdminLTE for demo purposes -->
     <script th:src="@{/js/demo.js}"></script>
     <script>
         $(document).ready(function () {
-            $('.sidebar-menu').tree()
+            $('.sidebar-menu').tree();
+
+            /**
+             * iCheck
+             */
+            $('input[type="checkbox"], input[type="radio"]').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+
+            /**
+             * Input musk
+             */
+            $('[data-mask]').inputmask();
         });
 
         $(document).on('click', '[data-toggle="lightbox"]', function (event) {
@@ -103,6 +120,7 @@
             }
 
         });
+
     </script>
 </section>
 </body>
